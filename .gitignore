@@ -1,0 +1,7 @@
+### Vagrant ###
+# General
+.vagrant/
+token/
+*.box
+
+# End

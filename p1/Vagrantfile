@@ -1,0 +1,23 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vbguest.installer_options = { allow_kernel_upgrade: true }
+
+  NODES = [
+    { :hostname => "rgallegoS", :ip => "192.168.42.110", :cpus => 1, :memory => 1024, :spath =>  "./Server.sh"},
+    { :hostname => "rgallegoSW", :ip => "192.168.42.111", :cpus => 1, :memory => 512, :spath =>  "./Serverworker.sh"}
+  ]
+
+  NODES.each do |node|
+    config.vm.define node[:hostname] do |config|
+      config.vm.hostname = node[:hostname]
+      config.vm.network "private_network", ip: node[:ip]
+      config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+      config.vm.provision "shell", path: node[:spath], privileged: true
+      config.vm.provider "virtualbox" do |vb|
+        vb.name = node[:hostname]
+        vb.cpus = node[:cpus]
+        vb.memory = node[:memory]
+      end
+    end
+  end
+end
