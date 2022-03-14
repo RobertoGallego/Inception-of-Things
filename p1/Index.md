@@ -62,9 +62,9 @@ kubectl :
 kubectl get all --all-namespaces
 kubectl cluster-info
 k get nodes -o wide
+worker: systemctl status k3s-agent
 
 --------------------------
-
 P1 :
 
 vagrant init centos/7
