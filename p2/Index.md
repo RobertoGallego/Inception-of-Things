@@ -75,3 +75,4 @@ kubectl get all --all-namespaces
 kubectl delete namespaces <NAME>
 kubectl delete -f  <FILE>
 curl -H "Host:app1.com" 192.168.42.110
+vagrant rsync-auto
